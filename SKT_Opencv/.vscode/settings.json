@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./chap05/chap05"
+    ]
+}
