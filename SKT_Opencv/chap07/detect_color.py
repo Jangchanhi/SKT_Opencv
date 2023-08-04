@@ -1,9 +1,24 @@
 import cv2
 import numpy as np
+import random
 
 # 이미지 불러오기
 image = cv2.imread('./chap07/images/test_color.jpg')
+image = np.ones((480, 640, 3), dtype="uint8") *255
 
+def draw_circle(iamge, color, radius, count):
+    # 원의 위치가 겹치지 않도록 중복 없이 좌표 생성
+    positions = set()
+
+    while len(positions) < count:
+        # 반지름만큼의 여유를 두고 좌표를 랜덤하게 생성
+        x = random.randint(radius, image.shape[1] - radius)
+        y = random.randint(radius, image.shape[0] - radius)
+
+        if (x,y) not in positions:
+            cv2.circle(image, (x,y), radius, color, -1)
+            positions.add((x,y))
+            
 # 이미지를 그레이스케일로 변환
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
